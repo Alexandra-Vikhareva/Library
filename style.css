@@ -12,3 +12,14 @@
 .form-container > *{
     margin: 30px;
 }
+
+#cards{
+    display: grid;
+    grid-template-rows: 400px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+}

@@ -5,13 +5,37 @@ class Book {
     this.pages = pages;
     this.read = read;
     this.info = function () {
-      return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
+      return [this.title, `by ${this.author}`, `${this.pages} pages`, read? 'Read':'Not Read']
     };
   }
 }
 
 const myLibrary = [];
 
+function renderCard(info){
+  const card = document.createElement('div');
+  for (let i=0; i<=2; i++){
+    p = document.createElement('p');
+    p.textContent = info[i];
+    card.append(p)
+  }
+
+  const btn = document.createElement('button');
+  if (info[3]){
+    btn.textContent = 'Read';
+    btn.classList.add('read');
+  }else{
+    btn.textContent = 'Not Read';
+    btn.classList.add('notRead');
+  }
+  const del = document.createElement('button');
+  del.textContent = 'Delete Card';
+  del.classList.add('delete');
+  card.classList.add('card');
+  card.append(btn, del);
+  const container = document.querySelector('#cards');
+  container.append(card);
+}
 
 function addBookToLibrary() {
   const title = document.querySelector('.title');
@@ -24,6 +48,7 @@ function addBookToLibrary() {
   myLibrary.push(book);
   conainer.remove();
 
+  renderCard(book.info());
   console.log(myLibrary);
 }
 
@@ -64,6 +89,4 @@ function showBookForm() {
 
     confirm.addEventListener('click', () => addBookToLibrary());
 }
-
-
 
