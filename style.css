@@ -1,0 +1,14 @@
+.form-container{
+    max-width: 300px;
+    max-height: 500px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid black;
+    padding: 30px;
+}
+
+.form-container > *{
+    margin: 30px;
+}
