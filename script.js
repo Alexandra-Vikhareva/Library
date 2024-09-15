@@ -1,3 +1,5 @@
+const myLibrary = [];
+
 class Book {
   constructor(title, author, pages, read) {
     this.title = title;
@@ -5,12 +7,10 @@ class Book {
     this.pages = pages;
     this.read = read;
     this.info = function () {
-      return [this.title, `by ${this.author}`, `${this.pages} pages`, read? 'Read':'Not Read']
+      return [this.title, `by ${this.author}`, `${this.pages} pages`, this.read]
     };
   }
 }
-
-const myLibrary = [];
 
 function renderCard(info){
   const card = document.createElement('div');
@@ -35,6 +35,18 @@ function renderCard(info){
   card.append(btn, del);
   const container = document.querySelector('#cards');
   container.append(card);
+
+  del.addEventListener('click', () => deleteCard(del.parentElement))
+}
+
+function renderAllCards(){
+  for (let el in myLibrary){
+    renderCard(myLibrary[el].info())
+  }
+}
+
+function deleteCard(card){
+  card.remove();
 }
 
 function addBookToLibrary() {
@@ -44,17 +56,13 @@ function addBookToLibrary() {
   const read = document.querySelector('#read');
   const conainer = document.querySelector('.form-container');
   
-  const book = new Book(title.value, author.value, pages.value, read.value);
+  const book = new Book(title.value, author.value, pages.value, read.checked);
   myLibrary.push(book);
   conainer.remove();
 
   renderCard(book.info());
   console.log(myLibrary);
 }
-
-addBtn = document.querySelector('#add');
-addBtn.addEventListener('click', () => showBookForm());
-
 
 function showBookForm() {
     const body = document.querySelector('body');
@@ -90,3 +98,11 @@ function showBookForm() {
     confirm.addEventListener('click', () => addBookToLibrary());
 }
 
+addBtn = document.querySelector('#add');
+addBtn.addEventListener('click', () => showBookForm());
+
+delBtns = document.querySelectorAll('.delete');
+delBtns.forEach(element => 
+  {element.addEventListener('click', () => console.log(element.parentElement))
+  
+});
