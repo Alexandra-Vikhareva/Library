@@ -70,6 +70,7 @@ function showBookForm() {
     const title = document.createElement('input');
     const author = document.createElement('input');
     const pages = document.createElement('input');
+    const readDiv = document.createElement('div');
     const read = document.createElement('label');
     const readCheck = document.createElement('input');
     const confirm = document.createElement('button');
@@ -77,6 +78,7 @@ function showBookForm() {
 
     title.setAttribute('placeholder', 'Title');
     title.classList.add('title');
+    title.setAttribute('required', '');
     author.setAttribute('placeholder', 'Author');
     author.classList.add('author');
     pages.setAttribute('placeholder', 'Pages');
@@ -85,13 +87,15 @@ function showBookForm() {
     readCheck.setAttribute('type', 'checkbox');
     readCheck.setAttribute('id', 'read');
     read.setAttribute('for', 'read');
+    close.classList.add('close');
 
 
     read.textContent = 'Have you read it?';
     close.textContent = '×';
     confirm.textContent = 'Add new book';
-
-    container.append(close, title, author, pages, readCheck, read, confirm);
+    confirm.setAttribute('type', 'submit');
+    readDiv.append(readCheck, read);
+    container.append(close, title, author, pages, readDiv, confirm);
     container.classList.add('form-container')
     body.appendChild(container);
 
