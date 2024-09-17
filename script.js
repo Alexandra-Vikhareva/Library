@@ -36,7 +36,8 @@ function renderCard(info){
   const container = document.querySelector('#cards');
   container.append(card);
 
-  del.addEventListener('click', () => deleteCard(del.parentElement))
+  del.addEventListener('click', () => {deleteCard(del.parentElement)})
+  btn.addEventListener('click', () => {changeBookStatus(btn)})
 }
 
 function renderAllCards(){
@@ -46,6 +47,10 @@ function renderAllCards(){
 }
 
 function deleteCard(card){
+  const cont = document.querySelector('#cards');
+  const cards = Array.from(cont.childNodes)
+  console.log(cards.indexOf(card))
+  myLibrary.splice(cards.indexOf(card), 1)
   card.remove();
 }
 
@@ -102,11 +107,17 @@ function showBookForm() {
     confirm.addEventListener('click', () => addBookToLibrary());
 }
 
+function changeBookStatus(button){
+  if (button.classList.contains('read')){
+    button.classList.add('notRead');
+    button.classList.remove('read');
+    button.textContent = 'Not Read'
+  }else{
+    button.classList.remove('notRead');
+    button.classList.add('read');
+    button.textContent = 'Read';
+  }
+}
+
 addBtn = document.querySelector('#add');
 addBtn.addEventListener('click', () => showBookForm());
-
-delBtns = document.querySelectorAll('.delete');
-delBtns.forEach(element => 
-  {element.addEventListener('click', () => console.log(element.parentElement))
-  
-});
