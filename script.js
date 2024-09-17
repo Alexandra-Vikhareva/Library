@@ -1,4 +1,11 @@
-const myLibrary = [];
+
+let myLibrary = JSON.parse(localStorage.getItem('library'))
+
+if (myLibrary == null) {
+  myLibrary = [];
+}else{
+  renderAllCards();
+}
 
 class Book {
   constructor(title, author, pages, read) {
@@ -6,11 +13,12 @@ class Book {
     this.author = author;
     this.pages = pages;
     this.read = read;
-    this.info = function () {
-      return [this.title, `by ${this.author}`, `${this.pages} pages`, this.read]
-    };
-  }
+  };
 }
+
+function info (book) {
+      return [book.title, `by ${book.author}`, `${book.pages} pages`, book.read]
+  }
 
 function renderCard(info){
   const card = document.createElement('div');
@@ -42,7 +50,7 @@ function renderCard(info){
 
 function renderAllCards(){
   for (let el in myLibrary){
-    renderCard(myLibrary[el].info())
+    renderCard(info(myLibrary[el]))
   }
 }
 
@@ -51,6 +59,7 @@ function deleteCard(card){
   const cards = Array.from(cont.childNodes)
   myLibrary.splice(cards.indexOf(card), 1)
   card.remove();
+  localStorage.setItem('library', JSON.stringify(myLibrary));
 }
 
 function addBookToLibrary() {
@@ -72,7 +81,8 @@ function addBookToLibrary() {
     myLibrary.push(book);
     deleteForm();
 
-    renderCard(book.info());
+    renderCard(info(book));
+    localStorage.setItem('library', JSON.stringify(myLibrary));
     console.log(myLibrary);}
 }
 
@@ -142,7 +152,7 @@ function changeBookStatus(button){
     button.classList.add('read');
     button.textContent = 'Read';
   }
-
+  localStorage.setItem('library', JSON.stringify(myLibrary));
 }
 
 addBtn = document.querySelector('#add');
