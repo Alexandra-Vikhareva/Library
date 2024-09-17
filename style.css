@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Bebas Nune RU';
+    src: url(./fonts/ofont.ru_Bebas\ Neue.woff2);
+}
+
 .bebas-neue-regular {
     font-family: "Bebas Neue", sans-serif;
     font-weight: 400;
@@ -77,7 +82,7 @@ body{
     justify-content: space-between;
     background-color: var(--PRIMARY-COLOR);
     color: #212121;
-    font-family: "Bebas Neue";
+    font-family: "Bebas Neue" , "Bebas Nune RU";
 }
 
 button{
