@@ -49,7 +49,6 @@ function renderAllCards(){
 function deleteCard(card){
   const cont = document.querySelector('#cards');
   const cards = Array.from(cont.childNodes)
-  console.log(cards.indexOf(card))
   myLibrary.splice(cards.indexOf(card), 1)
   card.remove();
 }
@@ -108,6 +107,9 @@ function showBookForm() {
 }
 
 function changeBookStatus(button){
+  const cont = document.querySelector('#cards');
+  const cards = Array.from(cont.childNodes)
+  myLibrary[cards.indexOf(button.parentElement)].read = !(myLibrary[cards.indexOf(button.parentElement)].read)
   if (button.classList.contains('read')){
     button.classList.add('notRead');
     button.classList.remove('read');
@@ -117,6 +119,7 @@ function changeBookStatus(button){
     button.classList.add('read');
     button.textContent = 'Read';
   }
+
 }
 
 addBtn = document.querySelector('#add');
