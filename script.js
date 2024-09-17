@@ -58,13 +58,22 @@ function addBookToLibrary() {
   const author = document.querySelector('.author');
   const pages = document.querySelector('.pages');
   const read = document.querySelector('#read');
-  
-  const book = new Book(title.value, author.value, pages.value, read.checked);
-  myLibrary.push(book);
-  deleteForm();
 
-  renderCard(book.info());
-  console.log(myLibrary);
+  if (title.value == '' || author.value == '' || pages.value == ''){
+    for (el of [title, author, pages]){
+      if (el.value == '')
+        el.classList.add('required')
+      else
+      el.classList.remove('required')
+    } 
+  }
+  else {
+    const book = new Book(title.value, author.value, pages.value, read.checked);
+    myLibrary.push(book);
+    deleteForm();
+
+    renderCard(book.info());
+    console.log(myLibrary);}
 }
 
 function deleteForm(){
@@ -93,7 +102,6 @@ function showBookForm() {
     container.setAttribute('method', 'post');
     title.setAttribute('placeholder', 'Title');
     title.classList.add('title');
-    title.required = true;
     author.setAttribute('placeholder', 'Author');
     author.classList.add('author');
     pages.setAttribute('placeholder', 'Pages');
@@ -108,7 +116,7 @@ function showBookForm() {
     read.textContent = 'Have you read it?';
     close.textContent = '×';
     confirm.textContent = 'Add new book';
-    confirm.setAttribute('type', 'submit');
+    confirm.setAttribute('type', 'button');
     readDiv.append(readCheck, read);
     container.append(close, title, author, pages, readDiv, confirm);
     container.classList.add('form-container')

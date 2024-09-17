@@ -177,3 +177,15 @@ button:disabled{
     background-color: chartreuse;
 }
 
+input.required{
+  border: 2px solid crimson;
+  background-color: antiquewhite;
+}
+
+form::after{
+  content: 'Please fill in all fields';
+  font-size: 12px;
+  color: crimson;
+  position: relative;
+  left: 50px;
+}
