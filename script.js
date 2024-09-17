@@ -58,19 +58,27 @@ function addBookToLibrary() {
   const author = document.querySelector('.author');
   const pages = document.querySelector('.pages');
   const read = document.querySelector('#read');
-  const conainer = document.querySelector('.form-container');
   
   const book = new Book(title.value, author.value, pages.value, read.checked);
   myLibrary.push(book);
-  conainer.remove();
+  deleteForm();
 
   renderCard(book.info());
   console.log(myLibrary);
 }
 
+function deleteForm(){
+  const div = document.querySelector('.back');
+  div.remove();
+  addBtn.removeAttribute('disabled', '');
+}
+
 function showBookForm() {
+    addBtn.setAttribute('disabled', '');
+
     const body = document.querySelector('body');
-    const container = document.createElement('div');
+    const div = document.createElement('div');
+    const container = document.createElement('form');
     const title = document.createElement('input');
     const author = document.createElement('input');
     const pages = document.createElement('input');
@@ -80,9 +88,12 @@ function showBookForm() {
     const confirm = document.createElement('button');
     const close = document.createElement('button');
 
+    div.classList.add('back');
+    container.setAttribute('action', '#');
+    container.setAttribute('method', 'post');
     title.setAttribute('placeholder', 'Title');
     title.classList.add('title');
-    title.setAttribute('required', '');
+    title.required = true;
     author.setAttribute('placeholder', 'Author');
     author.classList.add('author');
     pages.setAttribute('placeholder', 'Pages');
@@ -101,9 +112,13 @@ function showBookForm() {
     readDiv.append(readCheck, read);
     container.append(close, title, author, pages, readDiv, confirm);
     container.classList.add('form-container')
-    body.appendChild(container);
+    div.appendChild(container);
 
-    confirm.addEventListener('click', () => addBookToLibrary());
+    body.append(div);
+  
+
+    close.addEventListener('click', () => {deleteForm()});
+    confirm.addEventListener('click', () => {addBookToLibrary()});
 }
 
 function changeBookStatus(button){
@@ -123,4 +138,4 @@ function changeBookStatus(button){
 }
 
 addBtn = document.querySelector('#add');
-addBtn.addEventListener('click', () => showBookForm());
+addBtn.addEventListener('click', () => {showBookForm()});

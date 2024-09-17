@@ -63,6 +63,13 @@ p, h1, h2, h3, h4, h5, h6 {
     --DIVIDER-COLOR: #BDBDBD;
 }
 
+.back{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(33, 33, 33, 0.5) ;
+}
+
 body{
     display: flex;
     flex-direction: column;
@@ -76,6 +83,10 @@ body{
 button{
     background-color: var(--ACCENT-COLOR);
     margin: 10px;
+}
+
+button:disabled{
+    color: var(--SECONDARY-TEXT);
 }
 
 .header{
@@ -160,3 +171,4 @@ button{
 .read{
     background-color: chartreuse;
 }
+
